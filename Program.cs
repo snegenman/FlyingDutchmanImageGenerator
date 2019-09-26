@@ -117,13 +117,14 @@ namespace FlyingDutchman
         {
             flyType.DrawFly(_image, left, top);
 
-            DrawAreas.Add(new DrawArea(left, left+4, top, top+4));
+            DrawAreas.Add(new DrawArea(left, left+4, top, top+4, flyType.ToString()));
         }
     }
 
     public interface IFlyType
     {
         void DrawFly(Image<Rgba32> image, int left, int top);
+
     }
     public class FlyTypeSquare : IFlyType
     {
@@ -176,6 +177,11 @@ namespace FlyingDutchman
             image[left + 3, top + 4] = Rgba32.Red;
             image[left + 4, top + 4] = Rgba32.Red;
         }
+
+        public override string ToString()
+        {
+            return ("Top");
+        }
     }
 
     public class FlyTypePointToLeft : IFlyType
@@ -198,6 +204,10 @@ namespace FlyingDutchman
             image[left + 4, top + 3] = Rgba32.Red;
 
             image[left + 4, top + 4] = Rgba32.Red;
+        }
+        public override string ToString()
+        {
+            return ("Left");
         }
     }
 
@@ -222,6 +232,10 @@ namespace FlyingDutchman
 
             image[left + 0, top + 4] = Rgba32.Red;
         }
+        public override string ToString()
+        {
+            return ("Right");
+        }
     }
 
     public class FlyTypePointToBottom : IFlyType
@@ -244,6 +258,10 @@ namespace FlyingDutchman
             image[left + 2, top + 3] = Rgba32.Red;
 
             image[left + 2, top + 4] = Rgba32.Red;
+        }
+        public override string ToString()
+        {
+            return ("Bottom");
         }
     }
 
@@ -304,13 +322,15 @@ namespace FlyingDutchman
         public int Right { get; private set; }
         public int Top { get; private set; }
         public int Bottom { get; private set; }
+        public string Type { get; private set; }
 
-        public DrawArea(int left, int right, int top, int bottom)
+        public DrawArea(int left, int right, int top, int bottom, string type)
         {
             Left = left;
             Right = right;
             Top = top;
             Bottom = bottom;
+            Type = type;
         }
 
         /// <summary>
